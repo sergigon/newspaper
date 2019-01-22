@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+	<channel>
+		<!--Elementos fijos-->
+		<title>Mi canal de RSS</title>
+		<link>http://kensukeweb.epizy.com</link>
+		<description>Noticias de actualidad</description>
+		<!--Elementos variables (items)-->
+		<item>
+			<title>Noticia de actualidad</title>
+			<link>https://elpais.com/</link>
+			<description>Noticias sobre el pais</description>
+			<!--<guid> </guid>--> <!--Identificador unico para noticias (Opcional)-->
+		</item>
+
+	</channel>
+</rss>

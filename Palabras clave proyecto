@@ -1,2 +1,7 @@
-Meneame
-resumenes cortos
++ Meneame
++ resumenes cortos
++ Resumenes
+  - Resumenes cortos:
+    entry[summary] o entry['summary_detail']['value']
+  - Resumenes largos:
+    entry[content][i][value]

@@ -1,0 +1,105 @@
+feed
+	title
+	title_detail
+		base
+		type
+		value
+		language
+	ttl
+	subtitle
+	subtitle_detail
+		base
+		type
+		value
+		language
+	image
+		title
+		title_detail
+			base
+			type
+			value
+			language
+		link
+		links[]
+			href
+			type
+			rel
+		href
+	link
+	links[]
+		href
+		type
+		rel
+	updated
+	updated_parsed
+	published
+	published_parsed
+	rights
+	rights_detail
+		base
+		type
+		value
+		language
+	language
+headers
+	accept-ranges
+	cache-control
+	connection
+	content-length
+	content-encoding
+	content-type
+	date
+	etag
+	expires
+	last-modified
+	server
+	vary
+entries[]
+	title
+	title_detail
+		base
+		type
+		value
+		languaje
+	summary
+	summary_detail
+		base
+		type
+		value
+		language
+	content[]
+		base
+		type
+		value
+		language
+	link
+	links[]
+		length (a veces)
+		href
+		type
+		rel
+	author
+	author_detail
+		name
+	authors[]
+		name
+	comments
+	published
+	published_parsed
+	guidislink
+	id
+	tags[]
+		term
+		scheme
+		label
+namespaces
+	content
+	dc
+status
+updated
+updated_parsed
+encoding
+bozo
+etag
+href
+version

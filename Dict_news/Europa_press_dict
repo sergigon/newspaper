@@ -1,0 +1,97 @@
+feed
+	updated
+	published_parsed
+	subtitle
+	language
+	links[]
+		href
+		type
+		rel
+	title
+	ttl
+	image
+		title_detail
+			base
+			type
+			value
+			language
+		href
+		link
+		links[]
+			href
+			type
+			rel
+		title
+	rights
+	subtitle_detail
+		base
+		type
+		value
+		language
+	title_detail
+		base
+		type
+		value
+		language
+	link
+	published
+	rights_detail
+		base
+		type
+		value
+		language
+	updated_parsed
+status
+updated
+updated_parsed
+encoding
+bozo
+headers
+	tp-l2-cache
+	content-length
+	request-context
+	content-encoding
+	x-backend-server
+	accept-ranges
+	access-control-expose-headers
+	vary
+	tp-cache
+	server
+	last-modified
+	connection
+	cache-control
+	date
+	x-device
+	content-type
+	age
+href
+version
+entries[]
+	summary_detail
+		base
+		type
+		value
+		language
+	published_parsed
+	links[]
+		href
+		type
+		rel
+	title
+	tags[]
+		term
+		scheme
+		label
+	summary
+	guidislink
+	title_detail
+		base
+		type
+		value
+		languaje
+	link
+	published
+	id
+bozo_exception
+namespaces
+	''

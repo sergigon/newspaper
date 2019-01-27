@@ -1,0 +1,129 @@
+feed
+	title
+	title_detail
+		base
+		type
+		value
+		language
+	ttl
+	subtitle
+	subtitle_detail
+		base
+		type
+		value
+		language
+	image
+		title
+		title_detail
+			base
+			type
+			value
+			language
+		subtitle
+		subtitle_detail
+			base
+			type
+			value
+			language
+		link
+		links[]
+			href
+			type
+			rel
+		height
+		width
+		href
+	link
+	links[]
+		href
+		type
+		rel
+	updated
+	updated_parsed
+	published
+	published_parsed
+	rights
+	rights_detail
+		base
+		type
+		value
+		language
+	tags[]
+		term
+		scheme
+		label
+	language
+headers
+	accept-ranges
+	cache-control
+	connection
+	content-encoding
+	content-length
+	content-type
+	date
+	etag
+	expires
+	last-modified
+	referrer-policy
+	vary
+entries[]
+	title
+	title_detail
+		base
+		type
+		value
+		language
+	summary
+	summary_detail
+		base
+		type
+		value
+		language
+	content[]
+		base
+		type
+		value
+		language
+	media_content[]
+		url
+		width
+		medium
+		height
+	media_thumbnail[]
+		url
+		width
+		heigth
+	link
+	links[]
+		href
+		type
+		rel
+	author
+	authors[]
+		name
+	author_detail
+		name
+	published
+	published_parsed
+	guidislink
+	id
+	tags[]
+		term
+		scheme
+		label
+	href
+namespaces
+	''
+	media
+	itunes
+	ue
+	dc
+status
+updated
+updated_parsed
+encoding
+bozo
+bozo_exception
+etag
+href
+version

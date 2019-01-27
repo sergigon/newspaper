@@ -1,0 +1,80 @@
++ Skill ya creada: [Information skill](https://asimov.uc3m.es/common/information_skill/tree/indigo-devel)
++ [Instapaper style](http://313e5987718b346aaf83-f5e825270f29a84f7881423410384342.r78.cf1.rackcdn.com/1410832717-2014-09-16-at-03-24-29-.jpeg)
++ github python lector de noticias
+
+-------
+
+#[NewsApi](https://newsapi.org/)
+##Pros:
+- Bien organizada
+- Mucha información
+
+##Contras:
+- No están los periódicos españoles
+- Caro para uso comercial (500 euros/mes)
+
+--------------
+
+#[Newspaper3k](https://newspaper.readthedocs.io/en/latest/)
+**Newspaper3k Demo:** http://newspaper-demo.herokuapp.com/
+## Pros:
+- No necesita suscripción
+- En principio funcionaría con cualquier página
+
+## Contras:
+- Version buena está en python 3
+
+-------
+
+# Feeds Noticias
+Lista de feeds: https://www.euroresidentes.com/Diversion/Internet/rss_canales.htm
+
+## ElPais
+### Pros:
+- Ofrece resúmenes.
+
+### Contras:
+- Copyright. (Ver https://elpais.com/estaticos/contacte/ )
+
+## ElMundo, ABC, LaVanguardia
+### Contras:
+- No ofrece resúmenes.
+
+## BBC
+### Pros:
+- Se puede usar si se indica en la app (https://www.bbc.com/mundo/institucional/2011/03/000000_rss_gel )
+
+## ElEspañol
+### Pros:
++ No tiene copyright en el xml.
+
+--------
+# Tips
+Buscar palabras clave en una rss: https://www.europapress.es/contenidosrss
+Que es: https://www.genbeta.com/a-fondo/que-es-el-rss-y-como-sacarle-partido
+
+--------
+
+# Problemas legales
+**Palabras clave:**
++ Sindicación o redifusión web
+
+**Legal issues:**
++ https://www.out-law.com/en/topics/tmt--sourcing/software/rss-the-legal-issues/
++ https://www.lifewire.com/legal-side-of-rss-feeds-3469296
+
+**Procedimientos:**
++ Mirar en el XML si existe copyright.
++ Ir a los avisos legales de la página.
+
+**Webs sin copyright en el xml:**
++ El periodico
++ El Español
+
+OK google, dime las noticias de hoy 
+OK google, dime el tiempo de hoy
+$ hay 21 grados con nubes
+
+Posibles fuentes de noticias con mencion gratis:
++ bbc
++ libertad digital

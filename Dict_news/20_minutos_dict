@@ -1,0 +1,82 @@
+feed
+	subtitle
+	language
+	links[]
+		href
+		type
+		rel
+	title
+	image
+	rdf_seq
+	rdf_li
+	subtitle_detail
+		base
+		type
+		value
+		language
+	title_detail
+		base
+		type
+		value
+		language
+	link
+	entries
+	sy_updateperiod
+	sy_updatefrequency
+status
+version
+encoding
+bozo
+headers
+	via
+	x-cache
+	content-encoding
+	transfer-encoding
+	age
+	expires
+	vary
+	server
+	connection
+	x-varnish
+	x-20m-webserver
+	pragma
+	cache-control
+	date
+	x-amz-cf-id
+	content-type
+	x-20m-cache
+href
+namespaces
+	''
+	sy
+	taxo
+	admin
+	dc
+	rdf
+	slash
+entries[]
+	summary_detail
+		base
+		type
+		value
+		language
+	updated_parsed
+	links[]
+		href
+		type
+		rel
+	title
+	author
+	updated
+	summary
+	title_detail
+		base
+		type
+		value
+		language
+	link
+	authors[]
+		name
+	author_detail
+		name
+	id

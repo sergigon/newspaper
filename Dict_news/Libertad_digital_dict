@@ -1,0 +1,88 @@
+feed
+	updated
+	subtitle
+	updated_parsed
+	links[]
+		href
+		type
+		rel
+	title
+	image
+		subtitle
+		links[]
+			href
+			type
+			rel
+		title
+		subtitle_detail
+			base
+			type
+			value
+			language
+		href
+		link
+	feedburner_info
+		uri
+	subtitle_detail
+		base
+		type
+		value
+		language
+	language
+	title_detail
+		base
+		type
+		value
+		language
+	link
+status
+updated
+updated_parsed
+encoding
+bozo
+headers
+	x-xss-protection
+	x-content-type-options
+	content-encoding
+	transfer-encoding
+	expires
+	server
+	last-modified
+	connection
+	etag
+	cache-control
+	date
+	content-type
+etag
+href
+version
+entries[]
+	summary_detail
+		base
+		type
+		value
+		language
+	published_parsed
+	links[]
+		href
+		type
+		rel
+	title
+	feedburner_origlink
+	tags[]
+		term
+		scheme
+		label
+	summary
+	guidislink
+	title_detail
+		base
+		type
+		value
+		languaje
+	link
+	published
+	id
+namespaces
+	''
+	feedburner

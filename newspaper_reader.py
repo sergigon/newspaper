@@ -14,6 +14,8 @@ https://www.browserling.com/tools/html-to-text
 import feedparser
 import html2text # To convert html to text (https://pypi.org/project/html2text/)
 import datetime
+import requests
+from io import BytesIO # https://stackoverflow.com/questions/9772691/feedparser-with-timeout
 
 feeds = {
 	'bbc': {
@@ -110,117 +112,143 @@ parser.ignore_links = True # Ignores links
 parser.ignore_tables = True
 parser.body_width = 1000 # Number of charcaters per line (long number so no '\n' character appears)
 
-d = feedparser.parse(feeds['el_pais']['portada'])
+rss_feed = feeds['libertad_digital']['portada']
 
-############### Cache date managing ###############
-# Reads first line of cache
-first_line = '' # First line of the file
-try:
+def main():
+	# Do request using requests library and timeout
+	try:
+		print('Making request')
+		resp = requests.get(rss_feed, timeout=5.05)
+	except requests.ReadTimeout as e:
+		#logger.warn("Timeout when reading RSS %s: %s", rss_feed, e)
+		print("Timeout when reading RSS %s: %s", rss_feed, e)
+		return
+	except requests.exceptions.ConnectionError as e:
+		#logger.warn("Connection error; %s", e)
+		print("Connection error; %s", e)
+		return
+	except requests.exceptions.MissingSchema as e:
+		#logger.warn("MissingSchema; %s", e)
+		print("MissingSchema; %s", e)
+		return
+
+	# Put it to memory stream object universal feedparser
+	content = BytesIO(resp.content)
+
+	# Parse content
+	d = feedparser.parse(content)
+
+	############### Cache date managing ###############
+	# Reads first line of cache
+	first_line = '' # First line of the file
+	try:
+		file = open(news_cache, "r") # Read file
+		first_line = file.readline().replace("\n", "") # Gets first line
+		file.close() # Close file
+	except IOError as e: # File does not exists
+		print('ERROR: ' + str(e))
+	# If date is not updated or not exists, it erases the file and updates the date
+	if(first_line[:5] != '_____' or first_line[5:] != str(date)):
+		print('Updating cache date')
+		file = open(news_cache, "w") # Write file
+		file.write('_____' + str(date)) # _____{date}
+		file.close() # Close file
+
+	# Gets file lines
 	file = open(news_cache, "r") # Read file
-	first_line = file.readline().replace("\n", "") # Gets first line
+	file_lines = file.readlines() # Get lines
 	file.close() # Close file
-except IOError as e: # File does not exists
-	print('ERROR: ' + str(e))
-# If date is not updated or not exists, it erases the file and updates the date
-if(first_line[:5] != '_____' or first_line[5:] != str(date)):
-	print('Updating cache date')
-	file = open(news_cache, "w") # Write file
-	file.write('_____' + str(date)) # _____{date}
-	file.close() # Close file
+	for i in range(len(file_lines)): # Erases the line breaks
+		file_lines[i] = file_lines[i].replace("\n", "")
+	#####################################################
 
-# Gets file lines
-file = open(news_cache, "r") # Read file
-file_lines = file.readlines() # Get lines
-file.close() # Close file
-for i in range(len(file_lines)): # Erases the line breaks
-	file_lines[i] = file_lines[i].replace("\n", "")
-#####################################################
+	try:
+		print('__________feed:__________')
+		print(d['feed']['title'])
+		if(d['bozo']==0):
+			print 'xml well-formed'
+		else:
+			print 'ERROR xml not well-formed'
 
-try:
-	print('__________feed:__________')
-	print(d['feed']['title'])
-	if(d['bozo']==0):
-		print 'xml well-formed'
-	else:
-		print 'ERROR xml not well-formed'
+		print('Number of articles: ' + str(len(d['entries'])))
+		print('_________________________\n')
 
-	print('Number of articles: ' + str(len(d['entries'])))
-	print('_________________________\n')
+		# Loop for the entries
+		i = -1
+		for entry in d['entries']:
+			i+=1
+			found = False
 
-	# Loop for the entries
-	i = -1
-	for entry in d['entries']:
-		i+=1
-		found = False
+			# Checks if id is in the list
+			for id_n in file_lines:
+				if(entry['id'] == id_n):
+					#print('found')
+					found = True
+					break
 
-		# Checks if id is in the list
-		for id_n in file_lines:
-			if(entry['id'] == id_n):
-				#print('found')
-				found = True
+			# If id is not in the list, actual article is selected
+			if(not found):
+				# Show info
+				print('Article ' + str(i) + ':')
+				print('__________title:__________')
+				print(entry['title'])
+				print('__________id:__________')
+				print(entry['id'])
+				print('__________summary:__________')
+				print(entry['summary'])
+				print('__________summary_detail[type]:__________')
+				print(entry['summary_detail']['type'])
+				print('__________summary_detail[value]:__________')
+				summary_value = entry['summary_detail']['value']
+				# Checks if it is necessary to parse the text
+				if(entry['summary_detail']['type'] == 'text/html'):
+					print('### Summary parsed ###')
+					summary_value = parser.handle(summary_value)
+					# If text ends with '\n', ti is removed
+					while(summary_value[-1:] == '\n'):
+						summary_value = summary_value[0:-1]
+				print(summary_value)
+
+				if 'content' in entry:
+					for i in range(0, len(entry['content'])):
+						print('__________content[' + str(i) + '][type]:__________')
+						print(entry['content'][i]['type'])
+						print('__________content[' + str(i) + '][value]:__________')
+						content_value = entry['content'][i]['value']
+						if(entry['content'][i]['type'] == 'text/html'):
+							print('### Content parsed ###')
+							content_value = parser.handle(content_value)
+							# If text ends with '\n', ti is removed
+							while(content_value[-1:] == '\n'):
+								content_value = content_value[0:-1]
+						print(content_value)
+
+				# Updates cache
+				file = open(news_cache, "w") # Write file
+				file_lines.append(str(entry['id']))
+				text = ''
+				for line in file_lines:
+					text += str(line) + '\n'
+				file.write(text) # id
+				file.close() # Close file
 				break
 
-		# If id is not in the list, actual article is selected
-		if(not found):
-			# Show info
-			print('Article ' + str(i) + ':')
-			print('__________title:__________')
-			print(entry['title'])
-			print('__________id:__________')
-			print(entry['id'])
-			print('__________summary:__________')
-			print(entry['summary'])
-			print('__________summary_detail[type]:__________')
-			print(entry['summary_detail']['type'])
-			print('__________summary_detail[value]:__________')
-			summary_value = entry['summary_detail']['value']
-			# Checks if it is necessary to parse the text
-			if(entry['summary_detail']['type'] == 'text/html'):
-				print('### Summary parsed ###')
-				summary_value = parser.handle(summary_value)
-				# If text ends with '\n', ti is removed
-				while(summary_value[-1:] == '\n'):
-					summary_value = summary_value[0:-1]
-			print(summary_value)
+		# All articles have been found
+		if(found):
+			print('No more news to show')
 
-			if 'content' in entry:
-				for i in range(0, len(entry['content'])):
-					print('__________content[' + str(i) + '][type]:__________')
-					print(entry['content'][i]['type'])
-					print('__________content[' + str(i) + '][value]:__________')
-					content_value = entry['content'][i]['value']
-					if(entry['content'][i]['type'] == 'text/html'):
-						print('### Content parsed ###')
-						content_value = parser.handle(content_value)
-						# If text ends with '\n', ti is removed
-						while(content_value[-1:] == '\n'):
-							content_value = content_value[0:-1]
-					print(content_value)
+	except KeyError as e:
+		print('KeyError: ' + str(e))
 
-			# Updates cache
-			file = open(news_cache, "w") # Write file
-			file_lines.append(str(entry['id']))
-			text = ''
-			for line in file_lines:
-				text += str(line) + '\n'
-			file.write(text) # id
-			file.close() # Close file
-			break
+	print '##########################'
+	'''a = d['entries'][16]
+	for key in a:
+		print key
+		print a[key]
 
-	# All articles have been found
-	if(found):
-		print('No more news to show')
+	print parser.handle(a['summary'])
+	print '##########################'
+	print parser.handle(a['content'][0]['value'])
+	'''
 
-except KeyError as e:
-	print('KeyError: ' + str(e))
-
-print '##########################'
-'''a = d['entries'][16]
-for key in a:
-	print key
-	print a[key]
-
-print parser.handle(a['summary'])
-print '##########################'
-print parser.handle(a['content'][0]['value'])
-'''
+main()

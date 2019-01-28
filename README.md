@@ -17,4 +17,12 @@ https://stackoverflow.com/questions/4867197/failed-loading-english-pickle-with-n
 	>>> import nltk
 	>>> nltk.download()
 	
-Then an installation window appears. Go to the 'Models' tab and select 'punkt' from under the 'Identifier' column. Then click Download and it will install the necessary files. 
+Then an installation window appears. Go to the 'Models' tab and select 'punkt' from under the 'Identifier' column. Then click Download and it will install the necessary files.
+
+Feedparser Installation:
+
+$ sudo pip install feedparser
+
+Html2text Installation:
+
+$ sudo pip install html2text

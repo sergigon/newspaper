@@ -1,0 +1,70 @@
+Feed logo: d['feed']['image']['href']
+
+Articles image:
++ bbc:
+  Image:
+  - d['entries'][i]['media_thumbnail'][i]['url']
+  Extra data:
+  - d['entries'][i]['media_thumbnail'][i]['type'] == image/{}
+  - d['entries'][i]['media_thumbnail'][i]['width']
+  - d['entries'][i]['media_thumbnail'][i]['height']
+  Examples:
+  - http://c.files.bbci.co.uk/583B/production/_105378522_capt2.jpg
+  - http://c.files.bbci.co.uk/17B3F/production/_105378079_gettyimages-817342954-1.jpg
+
++ europa_press:
+  Image:
+  - d['entries'][i]['links'][i]['href']
+  Extra data:
+  - d['entries'][i]['links'][i]['type'] == image/{}
+  - d['entries'][i]['links'][i]['length'] (ej: 4096)
+  - d['entries'][i]['links'][i]['rel'] (ej: enclosure)
+  Examples:
+    If change 120, it can change size
+  - https://img.europapress.es/fotoweb/fotonoticia_20190129130122_120.jpg
+  - https://img.europapress.es/fotoweb/fotonoticia_20190129114700_120_v2.jpg
+
++ libertad_digital:
+  Image:
+  - d['entries'][i]['links'][i]['href']
+  Extra data:
+  - d['entries'][i]['links'][i]['type'] == image/{}
+  - d['entries'][i]['links'][i]['rel'] (ej: enclosure)
+  Examples:
+  - https://s.libertaddigital.com/2019/01/09/juan-manuel-moreno-bonilla090119.jpg
+  - https://s.libertaddigital.com/2019/01/29/jose-ramon-bauza-esradio-05-29012019-2.jpg
+  - https://s.libertaddigital.com/2018/10/07/071018_vox_vistalegre_046.JPG
+
++ el_pais:
+  Image:
+  - d['entries'][i]['links'][1]['href'] # Miniatura normal (mas pequeno)
+  - d['entries'][i]['links'][2]['href'] # Noticia normal (normal)
+  - d['entries'][i]['links'][2]['href'] # Noticia grande (mas grande) (a veces)
+  Extra data:
+  - d['entries'][i]['links'][i]['type'] == image/{}
+  - d['entries'][i]['links'][i]['length']
+    Miniatura noraml ej: 16020
+    Noticia normal ej: 43896
+  - d['entries'][i]['links'][i]['rel'] (ej: enclosure)
+  Examples:
+  - https://ep00.epimg.net/economia/imagenes/2018/04/17/actualidad/1523992253_966959_1523992332_miniatura_normal.jpg
+  - https://ep00.epimg.net/economia/imagenes/2018/04/17/actualidad/1523992253_966959_1523992332_noticia_normal.jpg
+
++ 20_minutos:
+  Image:
+  - Dentro de d['entries'][i]['summary']
+  Examples:
+  - https://cdn.20m.es/img2/recortes/2015/10/21/245003-620-282.jpg
+  - https://cdn.20m.es/img2/recortes/2014/03/07/163315-620-282.jpg?v=20190129132007
+
++ el_mundo
+  Image:
+  - d['entries'][i]['media_thumbnail'][i]['url']
+  - Dentro de d['entries'][i]['summary'] # No sirve
+  Extra data:
+  - d['entries'][i]['media_thumbnail'][i]['type'] == image/{}
+  - d['entries'][i]['media_thumbnail'][i]['width'] (150)
+  - d['entries'][i]['media_thumbnail'][i]['height'] (86)
+  Examples:
+  - https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2019/01/29/15487725706660_150x0.jpg
+  - http://secure-uk.imrworldwide.com/cgi-bin/m?cid=es-widgetueditorial&cg=rss-elmundo&ci=es-widgetueditorial&si=https://e00-elmundo.uecdn.es/rss/index.xml # (Summary) No sirve
